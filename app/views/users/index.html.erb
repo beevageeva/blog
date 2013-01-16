@@ -1,0 +1,46 @@
+<h1>Listing users</h1>
+
+<%= grid(@users, :show_filters => :always) do |user|
+
+    user.column :name => t('type'), :attribute => 'account_type' , :custom_filter => User::USER_TYPES.map{|o| [t('userType' + o) , o ]} do |u|
+            t('userType' + u.account_type)
+    end
+
+    user.column  :name => t('username') , :attribute => 'username' do |u|
+      u.username
+    end
+
+    user.column  :name => t('name') , :attribute => 'name' do |u|
+      u.name
+    end
+    user.column  :name => t('email') , :attribute => 'email' do |u|
+      u.email
+    end
+
+    user.column  :name => t('active') , :attribute => 'active' do |u|
+      u.active ? "Sí" : "No"
+    end
+    user.column  :name => t('creation_date') , :attribute => 'created_at' , :filter => false do |u|
+      u.created_at.strftime("%d.%m.%Y")
+    end
+
+    user.column  :name => t('view')  do |u|
+      link_to t(:view), u
+    end
+
+    user.column  :name => t('edit')  do |u|
+       link_to t(:edit), edit_user_path(u)
+    end
+
+    user.column  :name => 'Change state'  do |u|
+      link_to u.active? ? 'Inactivate' : 'Aactivate', :action=>'changeActive' , :userid => u.id
+    end
+    user.column  :name => t('login_as')  do |u|
+      link_to 'Login as', :action=>'loginAs' , :userid => u.id
+    end
+
+    user.column :name => t('delete') do |u|
+     link_to 'Destroy', u, :method => :delete, :confirm => 'Are you sure?' 
+    end
+
+end %>

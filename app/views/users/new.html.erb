@@ -1,0 +1,63 @@
+<h1>Register new user</h1>
+
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p>
+When your registered user is activated by an administrator you will receive an email to the address indicated in this form.
+</p>
+ <div class="field">
+    <%= f.label :account_type %> <br />
+ <%= f.select  "account_type" ,      User::USER_TYPES.map{ |ut| [ t("userType" + ut.to_s), ut  ]   }   %>
+ 
+  </div>
+
+ <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+	 <%= show_simple_captcha %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+
+
+
+
+<% end %>
+
+
+
+
+
+
+
+<%= link_to 'Back', users_path %>

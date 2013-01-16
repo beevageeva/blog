@@ -1,0 +1,12 @@
+<%= form_for(@category) do |f| %>
+
+  <div class="field">
+     <%= t('image') %> <br />
+    <%= f.file_field  :imgFile %></p>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

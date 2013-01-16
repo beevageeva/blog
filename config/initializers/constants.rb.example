@@ -1,0 +1,1 @@
+Blog::Application.config.MAIL_DOMAIN = "bogdana.serveblog.net"

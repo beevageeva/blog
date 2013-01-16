@@ -1,0 +1,29 @@
+<h1>  <%= @category.name%> </h1>
+
+<%  admin = session[:userid] && (  (type = User.find(session[:userid]).account_type)== User::BLOGGER || type == User::ADMIN ) %>
+
+<% if File.exists?(Rails.root.to_s + "/public/category_images/"+ @category.id.to_s  )%>
+<hr/>
+<img src="/category_images/<%= @category.id%>" width="250" height="230"  alt=''/>
+<% end %>
+
+
+<section>
+	<% @posts.each do |p|%>	
+               <p class="smallPost">
+                   <%= simple_format  p.description %>
+                </p>
+								 <p class="date"><span><%=p.created_at.strftime("%d.%m.%Y") %></span>  by: <%= p.user.username %><%= link_to "[Read more]", p  %>
+									<%  if admin %>
+    								<%= link_to '[Edit]', edit_post_path(p) %>
+    								<%= link_to ']Destroy]', p, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+									<% end %>
+
+									</p>
+
+
+	<% end %>
+ </section>
+<%  if admin %>
+<h1><%= link_to 'New Post', :controller => "posts" , :action => "newPost" , :category_id => @category.id %></h1>
+<% end %>	

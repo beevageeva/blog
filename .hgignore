@@ -1,0 +1,10 @@
+syntax: regexp
+^public/category_images/.*$
+^log/.*$
+^mongrel.pid$
+^Gemfile.lock$
+^Gemfile$
+^config/initializers/constants.rb$
+^config/database.yml$
+^public/assets/.*$
+^tmp/cache/.*$

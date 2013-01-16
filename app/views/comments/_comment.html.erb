@@ -1,0 +1,9 @@
+<div class="comment" id="<%= dom_id(comment) %>"  >
+  <strong>By: <%= comment.user.username %></strong>
+  <em><%= comment.created_at.strftime('%b %d, %Y at %I:%M %p') %></em>
+  <%= simple_format comment.body %>
+	<% if session[:userid] && ( (at = User.find(session[:userid]).account_type) == User::ADMIN || at == User::BLOGGER || at == User::READER && session[:userid] == comment.user_id ) %>
+  	<%= link_to "Destroy", comment,:remote => true,  :confirm => "You Sure", :method => :delete %>
+	<% end %>
+
+</div>

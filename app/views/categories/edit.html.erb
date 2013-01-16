@@ -1,0 +1,19 @@
+<h1>Editing category</h1>
+
+<%= render 'form' %>
+
+<p>
+  <b>Image:</b>
+<% if File.exists?(Rails.root.to_s + "/public/category_images/"+ @category.id.to_s  )%>
+ <img src="/category_images/<%= @category.id %>" width="250" height="230" alt+"" />
+<%= link_to 'Delete image file', :controller => "categories" , :action => "delete_image", :category_id => @category.id %> 
+
+<% end%>
+
+<br/>
+<%= link_to 'Change image file', :controller => "categories" , :action => "upload_image", :category_id => @category.id %> 
+</p>
+
+
+<%= link_to 'Show', @category %> |
+<%= link_to 'Back', categories_path %>
